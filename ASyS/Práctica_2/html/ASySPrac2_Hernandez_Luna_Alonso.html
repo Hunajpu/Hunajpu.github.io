@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Pr&aacute;ctica 2 Se&ntilde;ales continuas</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-10-29"><meta name="DC.source" content="ASySPrac2_Hernandez_Luna_Alonso.m"><style type="text/css">
+      --><title>Pr&aacute;ctica 2 Se&ntilde;ales continuas</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-10-31"><meta name="DC.source" content="ASySPrac2_Hernandez_Luna_Alonso.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,299 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Pr&aacute;ctica 2 Se&ntilde;ales continuas</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes</a></li><li><a href="#2">Objetivos</a></li><li><a href="#3">Introducci&oacute;n</a></li></ul></div><h2 id="1">Integrantes</h2><div><ul><li>Rodrigo Luna Reyes</li><li>Jos&eacute; Eduardo Hernandez Garcia</li><li>Jes&uacute;s Oren Alonso</li></ul></div><h2 id="2">Objetivos</h2><div><ul><li>Manipulaci&oacute;n b&aacute;sica de Matlab</li><li>Gr&aacute;ficas de se&ntilde;ales reales y complejas continuas</li><li>Transformaci&oacute;n de se&ntilde;ales continuas(escalamientos y traslaciones)</li><li>C&aacute;lculo de energ&iacute;a y potencia de se&ntilde;ales continuas</li></ul></div><h2 id="3">Introducci&oacute;n</h2><p>Matlab es una herramienta computacional muy poderosa que se ocupa en muchas ramas de ingenieria y ciencia. El nombre Matlab proviene del hecho que usa un lenguaje basado en matices, pero el software no solo se limita a un lenguaje tambi&eacute;n se pueden desarrollar aplicaci&oacute;nes gr&aacute;ficas, ejecutar an&aacute;lisis de datos, realizar aplicaciones web o de IOT, podemos optimizar c&oacute;digo de c y c++, tiene compatibilidad con muchos hardwares como Arduino y Raspberry Pi, adem&aacute;s de incluir una herramienta llamada Simulink. Simulink es un entorno de desarrollo de diagramas de bloques multidominio basado en dise&ntilde;o modelado. Las aplicaciones que se pueden desarrollar en matlab pueden ser de los siguientes campos:</p><div><ul><li>An&aacute;lisis de datos</li><li>Comunicaci&oacute;nes Inal&aacute;mbricas</li><li>Deep Learning</li><li>Visi&oacute;n Artificial</li><li>Procesamiento de se&ntilde;ales</li><li>Finanzas Cuantitativosy Gesti&oacute;n de Riesgos</li><li>Rob&oacute;tica</li><li>Sistemas de Control</li></ul></div><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 2 Se&ntilde;ales continuas</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes</a></li><li><a href="#2">Objetivos</a></li><li><a href="#3">Introducci&oacute;n</a></li><li><a href="#5">Desarrollo</a></li></ul></div><h2 id="1">Integrantes</h2><div><ul><li>Rodrigo Luna Reyes</li><li>Jos&eacute; Eduardo Hernandez Garcia</li><li>Jes&uacute;s Oren Alonso</li></ul></div><h2 id="2">Objetivos</h2><div><ul><li>Manipulaci&oacute;n b&aacute;sica de Matlab</li><li>Gr&aacute;ficas de se&ntilde;ales reales y complejas continuas</li><li>Transformaci&oacute;n de se&ntilde;ales continuas(escalamientos y traslaciones)</li><li>C&aacute;lculo de energ&iacute;a y potencia de se&ntilde;ales continuas</li></ul></div><h2 id="3">Introducci&oacute;n</h2><p>Matlab es una herramienta computacional muy poderosa que se ocupa en muchas ramas de ingenieria y ciencia. El nombre Matlab proviene del hecho que usa un lenguaje basado en matices, pero el software no solo se limita a un lenguaje tambi&eacute;n se pueden desarrollar aplicaci&oacute;nes gr&aacute;ficas, ejecutar an&aacute;lisis de datos, realizar aplicaciones web o de IOT, podemos optimizar c&oacute;digo de C y C++, tiene compatibilidad con muchos hardware como Arduino y Raspberry Pi, adem&aacute;s de incluir una herramienta llamada Simulink. Simulink es un entorno de desarrollo de diagramas de bloques multidominio basado en dise&ntilde;o modelado. Las aplicaciones que se pueden desarrollar en matlab pueden ser de los siguientes campos:</p><div><ul><li>An&aacute;lisis de datos</li><li>Comunicaci&oacute;nes Inal&aacute;mbricas</li><li>Deep Learning</li><li>Visi&oacute;n Artificial</li><li>Procesamiento de se&ntilde;ales</li><li>Finanzas Cuantitativosy Gesti&oacute;n de Riesgos</li><li>Rob&oacute;tica</li><li>Sistemas de Control Matlab es un software muy profesional y por lo mismo tiene un alto costo si es que queremos adquirir la licencia, si eres estudiante tienes alternativa de 50 usd que es el precio especial para los universitarios, sin embargo cuando quieras realizar c&oacute;digo de forma m&aacute;s profecional una licencia cuesta m&aacute;s de 2000 usd, sin embargo existen alternativas como Octave y Python. <a href="https://www.mathworks.com">MathWorks</a></li></ul></div><h2 id="5">Desarrollo</h2><p>1.-A continuaci&oacute;n se muestra Fun1</p><pre class="language-matlab"><span class="keyword">function</span> [ F ] = fun1(w, a)
+F=a./(a.^2+w.^2);
+<span class="keyword">end</span>
+</pre><p>2.-A continuaci&oacute;n se muestra el uso de una funci&oacute;n que gr&aacute;fica F(<img src="ASySPrac2_Hernandez_Luna_Alonso_eq08589834809570054062.png" alt="$\omega$">) de -2 a 2 con <img src="ASySPrac2_Hernandez_Luna_Alonso_eq01505123926026738633.png" alt="$\alpha=1$"></p><pre class="codeinput">w = -2:0.01:2;
+createfigure(w,1);
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_01.png" alt=""> <p>3.-Uso de funci&oacute;n an&oacute;nima y gr&aacute;fica de un ejemplo</p><pre class="codeinput">syms <span class="string">t</span> <span class="string">w</span>
+f1=fourier(exp(-2.*t).*heaviside(t),t,w);
+f = @(w) 1./(2+w.*1i);
+t = -1:0.01:5;
+figure
+plot(t,exp(-2.*t).*heaviside(t));
+title(<span class="string">'f(t)=(exp(-2t))u(t)'</span>);
+w = -10:0.01:10;
+figure
+plot(w,real(f(w)));
+title(<span class="string">'Parte real de F(w)'</span>);
+figure
+plot(w,imag(f(w)));
+title(<span class="string">'Parte imaginaria de F(w)'</span>);
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_02.png" alt=""> <img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_03.png" alt=""> <img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_04.png" alt=""> <p>4.-Ejercicios M1.1-M1.4 Lathi</p><pre class="codeinput">f = @(t) exp(-t).*cos(2*pi*t);
+t = 0;
+f(t)
+t = -2:2;
+f(t)
+figure
+plot(t,f(t));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f(t)'</span>);
+grid <span class="string">on</span>;
+t = -2:0.01:2;
+figure
+plot(t,f(t));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f(t)'</span>);
+grid <span class="string">on</span>;
+u = @(t) (t&gt;=0);
+t = -2:2;
+figure
+plot(t,u(t));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'u(t)'</span>);
+t=-2:0.01:2;
+figure
+plot(t,u(t));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'u(t)'</span>);
+axis([-2 2 -0.1 1.1]);
+p = @(t) ((t&gt;=0)&amp;(t&lt;1));
+t = -1:0.01:2;
+figure
+plot(t,p(t));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'p(t)=u(t)-u(t-1)'</span>);
+axis([-1 2 -.1 1.1]);
+g = @(t) exp(-t).*cos(2*pi*t).*(t&gt;=0);
+t=-2:0.01:2;
+figure
+plot(t,g(2*t+1));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'g(2t+1)'</span>);
+grid <span class="string">on</span>;
+figure
+plot(t,g(-t+1));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'-t+1'</span>);
+grid <span class="string">on</span>;
+plot(t,g(2*t+1)+g(-t+1));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'h(t)'</span>);
+grid <span class="string">on</span>;
+x = @(t) exp(-t).*((t&gt;=0)&amp;(t&lt;1));
+t = 0:0.01:1;
+E_x = sum(x(t).*x(t)*0.01)
+x_cuadrado = @(t) exp(-2*t).*((t&gt;=0)&amp;(t&lt;1));
+E_x = quad(x_cuadrado,0,1)
+g_cuadrado = @(t) exp(-2*t).*(cos(2*pi*t).^2).*(t&gt;=0);
+t = 0:0.001:100;
+E_g = sum(g_cuadrado(t)*0.001)
+E_g = quad(g_cuadrado,0,100)
+</pre><pre class="codeoutput">
+ans =
+
+     1
+
+
+ans =
+
+    7.3891    2.7183    1.0000    0.3679    0.1353
+
+
+E_x =
+
+    0.4367
+
+
+E_x =
+
+    0.4323
+
+
+E_g =
+
+    0.2567
+
+
+E_g =
+
+    0.2562
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_05.png" alt=""> <img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_06.png" alt=""> <img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_07.png" alt=""> <img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_08.png" alt=""> <img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_09.png" alt=""> <img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_10.png" alt=""> <img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_11.png" alt=""> <p>4.- Resolviendo problea 1.1.2 Encuentre la energ&iacute;a de las siguientes se&ntilde;ales, &iquest;Cu&aacute;l es el efecto de la energ&iacute;a si la se&ntilde;al es multiplicada por k?</p><p>a)</p><pre class="codeinput">t = 0:0.01:1;
+x = @(t) t;
+E_x = sum(x(t).*x(t)*0.01)
+figure
+plot(t,x(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'x(t)'</span>);
+</pre><pre class="codeoutput">
+E_x =
+
+    0.3384
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_12.png" alt=""> <p>b)</p><pre class="codeinput">t = -1:0.01:0;
+x = @(t) -t;
+E_x1 = sum(x(t).*x(t)*0.01)
+figure
+plot(t,x(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'x1(t)'</span>);
+</pre><pre class="codeoutput">
+E_x1 =
+
+    0.3383
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_13.png" alt=""> <p>c)</p><pre class="codeinput">t = 0:0.01:1;
+x = @(t) -t;
+E_x2 = sum(x(t).*x(t)*0.01)
+figure
+plot(t,x(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'x2(t)'</span>);
+</pre><pre class="codeoutput">
+E_x2 =
+
+    0.3384
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_14.png" alt=""> <p>d)</p><pre class="codeinput">t = 0:0.01:2;
+x = @(t) (t-1).*(t&gt;=1);
+E_x3 = sum(x(t).*x(t)*0.01)
+figure
+plot(t,x(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'x3(t)'</span>);
+</pre><pre class="codeoutput">
+E_x3 =
+
+    0.3384
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_15.png" alt=""> <p>e)</p><pre class="codeinput">t = 0:0.01:1;
+x = @(t) 2.*t;
+E_x4 = sum(x(t).*x(t)*0.01)
+figure
+plot(t,x(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'x4(t)'</span>);
+</pre><pre class="codeoutput">
+E_x4 =
+
+    1.3534
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_16.png" alt=""> <p>6.- Fuci&oacute;n Energ&iacute;a</p><pre class="language-matlab"><span class="keyword">function</span> [ resp ] = energia( fun,limits)
+<span class="comment">%Esta funci&oacute;n devuelve la energ&iacute;a de una se&ntilde;al reciviendo una funci&oacute;n</span>
+<span class="comment">%an&oacute;nima.</span>
+t = limts;
+x = fun;
+resp = sum(x(t).*x(t)*0.01);
+<span class="keyword">end</span>
+</pre><p>Encuentre las eneg&iacute;as de un par de se&ntilde;ales <img src="ASySPrac2_Hernandez_Luna_Alonso_eq07564006340981010143.png" alt="$x(t), y(t)$">. Dibuje y encuentre la energ&iacute;a dde las se&ntilde;ales <img src="ASySPrac2_Hernandez_Luna_Alonso_eq01453654374001751400.png" alt="$x(t)+y(t)$"> y <img src="ASySPrac2_Hernandez_Luna_Alonso_eq10573341575466828922.png" alt="$x(t)-y(t)$">.</p><p>a) Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq14833433867325483769.png" alt="$x(t)$"></p><pre class="codeinput">t = 0:0.01:2;
+x = @(t) 1+t.*0;
+E_x = energia(x,t)
+figure
+plot(t,x(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'x(t)'</span>);
+</pre><pre class="codeoutput">
+E_x =
+
+    2.0100
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_17.png" alt=""> <p>Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq10822186844117743572.png" alt="$y(t)$"></p><pre class="codeinput">y = @(t) ((t&gt;=0)&amp;(t&lt;=1))-((t&gt;=1)&amp;(t&lt;=2));
+E_y = energia(y,t)
+figure
+plot(t,y(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'y(t)'</span>);
+</pre><pre class="codeoutput">
+E_y =
+
+    2.0000
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_18.png" alt=""> <p>Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq01453654374001751400.png" alt="$x(t)+y(t)$"> y <img src="ASySPrac2_Hernandez_Luna_Alonso_eq10573341575466828922.png" alt="$x(t)-y(t)$"></p><pre class="codeinput">f=@(t) 1+t.*0+((t&gt;=0)&amp;(t&lt;=1))-((t&gt;=1)&amp;(t&lt;=2));
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'f(t)=x(t)+y(t)'</span>);
+</pre><pre class="codeoutput">
+E_xy =
+
+    4.0100
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_19.png" alt=""> <p>Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq01453654374001751400.png" alt="$x(t)+y(t)$"> y <img src="ASySPrac2_Hernandez_Luna_Alonso_eq10573341575466828922.png" alt="$x(t)-y(t)$"></p><pre class="codeinput">f=@(t) 1+t.*0-((t&gt;=0)&amp;(t&lt;=1))-((t&gt;=1)&amp;(t&lt;=2));
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'f(t)=x(t)-y(t)'</span>);
+</pre><pre class="codeoutput">
+E_xy =
+
+    0.0100
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_20.png" alt=""> <p>b) Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq14833433867325483769.png" alt="$x(t)$"></p><pre class="codeinput">t = 0:0.01:2*pi;
+x = @(t) sin(t);
+E_x = energia(x,t)
+figure
+plot(t,x(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'x(t)'</span>);
+</pre><pre class="codeoutput">
+E_x =
+
+    3.1416
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_21.png" alt=""> <p>Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq10822186844117743572.png" alt="$y(t)$"></p><pre class="codeinput">y = @(t) 1+t.*0;
+E_y = energia(y,t)
+figure
+plot(t,y(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'y(t)'</span>);
+</pre><pre class="codeoutput">
+E_y =
+
+    6.2900
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_22.png" alt=""> <p>Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq01453654374001751400.png" alt="$x(t)+y(t)$"> y <img src="ASySPrac2_Hernandez_Luna_Alonso_eq10573341575466828922.png" alt="$x(t)-y(t)$"></p><pre class="codeinput">f=@(t) 1+t.*0+sin(t);
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'f(t)=x(t)+y(t)'</span>);
+</pre><pre class="codeoutput">
+E_xy =
+
+    9.4316
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_23.png" alt=""> <p>Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq01453654374001751400.png" alt="$x(t)+y(t)$"> y <img src="ASySPrac2_Hernandez_Luna_Alonso_eq10573341575466828922.png" alt="$x(t)-y(t)$"></p><pre class="codeinput">f=@(t) 1+t.*0-sin(t);
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'f(t)=x(t)-y(t)'</span>);
+</pre><pre class="codeoutput">
+E_xy =
+
+    9.4316
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_24.png" alt=""> <p>c) Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq14833433867325483769.png" alt="$x(t)$"></p><pre class="codeinput">t = 0:0.01:pi;
+x = @(t) sin(t);
+E_x = energia(x,t)
+figure
+plot(t,x(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'x(t)'</span>);
+</pre><pre class="codeoutput">
+E_x =
+
+    1.5708
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_25.png" alt=""> <p>Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq10822186844117743572.png" alt="$y(t)$"></p><pre class="codeinput">y = @(t) ((t&gt;=0)&amp;(t&lt;=1))-((t&gt;=1)&amp;(t&lt;=2));
+E_y = energia(y,t)
+figure
+plot(t,y(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'y(t)'</span>);
+</pre><pre class="codeoutput">
+E_y =
+
+    2.0000
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_26.png" alt=""> <p>Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq01453654374001751400.png" alt="$x(t)+y(t)$"> y <img src="ASySPrac2_Hernandez_Luna_Alonso_eq10573341575466828922.png" alt="$x(t)-y(t)$"></p><pre class="codeinput">f=@(t) 1+t.*0+sin(t);
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'f(t)=x(t)+y(t)'</span>);
+</pre><pre class="codeoutput">
+E_xy =
+
+    8.7208
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_27.png" alt=""> <p>Energ&iacute;a de <img src="ASySPrac2_Hernandez_Luna_Alonso_eq01453654374001751400.png" alt="$x(t)+y(t)$"> y <img src="ASySPrac2_Hernandez_Luna_Alonso_eq10573341575466828922.png" alt="$x(t)-y(t)$"></p><pre class="codeinput">f=@(t) 1+t.*0-sin(t);
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'f(t)=x(t)-y(t)'</span>);
+</pre><pre class="codeoutput">
+E_xy =
+
+    0.7208
+
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_28.png" alt=""> <p>7.- Funci&oacute;n Potencia</p><pre class="language-matlab"><span class="keyword">function</span> [ resp ] = potencia( fun,limits)
+<span class="comment">%Esta func&iacute;on calc&uacute;la la potencia de una se&ntilde;al</span>
+resp = int(fun^2,limits(1),limits(length(limits)))/length(limits);
+<span class="keyword">end</span>
+</pre><p>Resolviendo ejercicio 1.1.4</p><pre class="codeinput">syms <span class="string">t</span>;
+f = symfun(t.^2,t);
+T= -2:0.01:2;
+P_x=potencia(f,T)
+figure
+plot(T,f(T));xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'x(t)'</span>);
+</pre><pre class="codeoutput"> 
+P_x =
+ 
+64/2005
+ 
+</pre><img vspace="5" hspace="5" src="ASySPrac2_Hernandez_Luna_Alonso_29.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Práctica 2 Señales continuas
 %% Integrantes
@@ -84,7 +376,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 % que usa un lenguaje basado en matices, pero el software no solo se limita
 % a un lenguaje también se pueden desarrollar aplicaciónes gráficas,
 % ejecutar análisis de datos, realizar aplicaciones web o de IOT, podemos
-% optimizar código de c y c++, tiene compatibilidad con muchos hardwares
+% optimizar código de C y C++, tiene compatibilidad con muchos hardware
 % como Arduino y Raspberry Pi, además de incluir una herramienta llamada
 % Simulink. Simulink es un entorno de desarrollo de diagramas de bloques 
 % multidominio basado en diseño modelado. Las aplicaciones que se pueden
@@ -98,5 +390,251 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 % * Finanzas Cuantitativosy Gestión de Riesgos
 % * Robótica
 % * Sistemas de Control
+% Matlab es un software muy profesional y por lo mismo tiene un alto costo
+% si es que queremos adquirir la licencia, si eres estudiante tienes
+% alternativa de 50 usd que es el precio especial para los universitarios,
+% sin embargo cuando quieras realizar código de forma más profecional una
+% licencia cuesta más de 2000 usd, sin embargo existen alternativas como
+% Octave y Python.
+% <https://www.mathworks.com MathWorks> 
+%% Desarrollo
+% 1.-A continuación se muestra Fun1
+%%
+% 
+%   function [ F ] = fun1(w, a)
+%   F=a./(a.^2+w.^2);
+%   end
+% 
+% 2.-A continuación se muestra el uso de una función que gráfica F($\omega$)
+% de -2 a 2 con $\alpha=1$
+w = -2:0.01:2;
+createfigure(w,1);
+%%
+% 3.-Uso de función anónima y gráfica de un ejemplo
+syms t w
+f1=fourier(exp(-2.*t).*heaviside(t),t,w);
+f = @(w) 1./(2+w.*1i);
+t = -1:0.01:5;
+figure
+plot(t,exp(-2.*t).*heaviside(t));
+title('f(t)=(exp(-2t))u(t)');
+w = -10:0.01:10;
+figure
+plot(w,real(f(w)));
+title('Parte real de F(w)');
+figure
+plot(w,imag(f(w)));
+title('Parte imaginaria de F(w)');
+%%
+% 4.-Ejercicios M1.1-M1.4 Lathi
+f = @(t) exp(-t).*cos(2*pi*t);
+t = 0;
+f(t)
+t = -2:2;
+f(t)
+figure
+plot(t,f(t));
+xlabel('t');
+ylabel('f(t)');
+grid on;
+t = -2:0.01:2;
+figure
+plot(t,f(t));
+xlabel('t');
+ylabel('f(t)');
+grid on;
+u = @(t) (t>=0);
+t = -2:2;
+figure
+plot(t,u(t));
+xlabel('t');
+ylabel('u(t)');
+t=-2:0.01:2;
+figure
+plot(t,u(t));
+xlabel('t');
+ylabel('u(t)');
+axis([-2 2 -0.1 1.1]);
+p = @(t) ((t>=0)&(t<1));
+t = -1:0.01:2;
+figure
+plot(t,p(t));
+xlabel('t');
+ylabel('p(t)=u(t)-u(t-1)');
+axis([-1 2 -.1 1.1]);
+g = @(t) exp(-t).*cos(2*pi*t).*(t>=0);
+t=-2:0.01:2;
+figure
+plot(t,g(2*t+1));
+xlabel('t');
+ylabel('g(2t+1)');
+grid on;
+figure
+plot(t,g(-t+1));
+xlabel('t');
+ylabel('-t+1');
+grid on;
+plot(t,g(2*t+1)+g(-t+1));
+xlabel('t');
+ylabel('h(t)');
+grid on;
+x = @(t) exp(-t).*((t>=0)&(t<1));
+t = 0:0.01:1;
+E_x = sum(x(t).*x(t)*0.01)
+x_cuadrado = @(t) exp(-2*t).*((t>=0)&(t<1));
+E_x = quad(x_cuadrado,0,1)
+g_cuadrado = @(t) exp(-2*t).*(cos(2*pi*t).^2).*(t>=0);
+t = 0:0.001:100;
+E_g = sum(g_cuadrado(t)*0.001)
+E_g = quad(g_cuadrado,0,100)
+%%
+% 4.- Resolviendo problea 1.1.2
+% Encuentre la energía de las siguientes señales, ¿Cuál es el efecto de la
+% energía si la señal es multiplicada por k?
+%% 
+% a)
+t = 0:0.01:1;
+x = @(t) t;
+E_x = sum(x(t).*x(t)*0.01)
+figure
+plot(t,x(t));xlabel('t');ylabel('x(t)');
+%% 
+% b)
+t = -1:0.01:0;
+x = @(t) -t;
+E_x1 = sum(x(t).*x(t)*0.01)
+figure
+plot(t,x(t));xlabel('t');ylabel('x1(t)');
+%% 
+% c)
+t = 0:0.01:1;
+x = @(t) -t;
+E_x2 = sum(x(t).*x(t)*0.01)
+figure
+plot(t,x(t));xlabel('t');ylabel('x2(t)');
+%% 
+% d)
+t = 0:0.01:2;
+x = @(t) (t-1).*(t>=1);
+E_x3 = sum(x(t).*x(t)*0.01)
+figure
+plot(t,x(t));xlabel('t');ylabel('x3(t)');
+%% 
+% e)
+t = 0:0.01:1;
+x = @(t) 2.*t;
+E_x4 = sum(x(t).*x(t)*0.01)
+figure
+plot(t,x(t));xlabel('t');ylabel('x4(t)');
+%%
+% 6.- Fución Energía
+%%
+% 
+%   function [ resp ] = energia( fun,limits)
+%   %Esta función devuelve la energía de una señal reciviendo una función
+%   %anónima.
+%   t = limts;
+%   x = fun;
+%   resp = sum(x(t).*x(t)*0.01);
+%   end
+% 
+%%
+% Encuentre las enegías de un par de señales $x(t), y(t)$. Dibuje y
+% encuentre la energía dde las señales $x(t)+y(t)$ y $x(t)-y(t)$.
+%%
+% a)
+% Energía de $x(t)$
+t = 0:0.01:2;
+x = @(t) 1+t.*0;
+E_x = energia(x,t)
+figure
+plot(t,x(t));xlabel('t');ylabel('x(t)');
+%%
+% Energía de $y(t)$
+y = @(t) ((t>=0)&(t<=1))-((t>=1)&(t<=2));
+E_y = energia(y,t)
+figure
+plot(t,y(t));xlabel('t');ylabel('y(t)');
+%%
+% Energía de $x(t)+y(t)$ y $x(t)-y(t)$
+f=@(t) 1+t.*0+((t>=0)&(t<=1))-((t>=1)&(t<=2));
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel('t');ylabel('f(t)=x(t)+y(t)');
+%%
+% Energía de $x(t)+y(t)$ y $x(t)-y(t)$
+f=@(t) 1+t.*0-((t>=0)&(t<=1))-((t>=1)&(t<=2));
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel('t');ylabel('f(t)=x(t)-y(t)');
+%%
+% b)
+% Energía de $x(t)$
+t = 0:0.01:2*pi;
+x = @(t) sin(t);
+E_x = energia(x,t)
+figure
+plot(t,x(t));xlabel('t');ylabel('x(t)');
+%%
+% Energía de $y(t)$
+y = @(t) 1+t.*0;
+E_y = energia(y,t)
+figure
+plot(t,y(t));xlabel('t');ylabel('y(t)');
+%%
+% Energía de $x(t)+y(t)$ y $x(t)-y(t)$
+f=@(t) 1+t.*0+sin(t);
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel('t');ylabel('f(t)=x(t)+y(t)');
+%%
+% Energía de $x(t)+y(t)$ y $x(t)-y(t)$
+f=@(t) 1+t.*0-sin(t);
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel('t');ylabel('f(t)=x(t)-y(t)');
+%%
+% c)
+% Energía de $x(t)$
+t = 0:0.01:pi;
+x = @(t) sin(t);
+E_x = energia(x,t)
+figure
+plot(t,x(t));xlabel('t');ylabel('x(t)');
+%%
+% Energía de $y(t)$
+y = @(t) ((t>=0)&(t<=1))-((t>=1)&(t<=2));
+E_y = energia(y,t)
+figure
+plot(t,y(t));xlabel('t');ylabel('y(t)');
+%%
+% Energía de $x(t)+y(t)$ y $x(t)-y(t)$
+f=@(t) 1+t.*0+sin(t);
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel('t');ylabel('f(t)=x(t)+y(t)');
+%%
+% Energía de $x(t)+y(t)$ y $x(t)-y(t)$
+f=@(t) 1+t.*0-sin(t);
+E_xy = energia(f,t)
+figure
+plot(t,f(t));xlabel('t');ylabel('f(t)=x(t)-y(t)');
+%%
+% 7.- Función Potencia
+%%
+% 
+%   function [ resp ] = potencia( fun,limits)
+%   %Esta funcíon calcúla la potencia de una señal
+%   resp = int(fun^2,limits(1),limits(length(limits)))/length(limits);
+%   end
+% 
+%%
+% Resolviendo ejercicio 1.1.4
+syms t;
+f = symfun(t.^2,t);
+T= -2:0.01:2;
+P_x=potencia(f,T)
+figure
+plot(T,f(T));xlabel('t');ylabel('x(t)');
 ##### SOURCE END #####
 --></body></html>
