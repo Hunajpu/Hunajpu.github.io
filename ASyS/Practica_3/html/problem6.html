@@ -1,0 +1,280 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica 3: Se&ntilde;ales en tiempo discreto</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-11-17"><meta name="DC.source" content="problem6.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 3: Se&ntilde;ales en tiempo discreto</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes</a></li><li><a href="#2">Objetivos</a></li><li><a href="#3">Desarrollo</a></li></ul></div><h2 id="1">Integrantes</h2><div><ul><li>Alonso Valdez Oren Jes&uacute;s</li><li>Hern&aacute;ndez Garc&iacute;a Eduardo</li><li>Luna Reyes Rodrigo</li></ul></div><h2 id="2">Objetivos</h2><div><ul><li>Manipulaci&oacute;n b&aacute;sica de MATLAB</li><li>Gr&aacute;ficas de se&ntilde;ales reales y complejas discretas</li><li>Transformaci&oacute;n de se&ntilde;ales discretas (escalamientos y traslaciones)</li><li>Calculo de energ&iacute;a y potencia de se&ntilde;ales discretas</li></ul></div><h2 id="3">Desarrollo</h2><pre class="language-matlab"><span class="keyword">function</span> [f] = fun1(W,a)
+f =@(n) a.^n.*cos(W.*n)+1j.*a.^n.*sin(W.*n).*(n&gt;=0)
+<span class="keyword">end</span>
+</pre><pre class="codeinput">n = -2:10;
+a = 0.9;
+f = @(n) (n.*a.^n).*(n&gt;0);
+fun2();
+</pre><img vspace="5" hspace="5" src="problem6_01.png" alt=""> <img vspace="5" hspace="5" src="problem6_02.png" alt=""> <img vspace="5" hspace="5" src="problem6_03.png" alt=""> <pre class="language-matlab"><span class="keyword">function</span> [E] = energiadis(t,A)
+</pre><pre class="language-matlab"><span class="keyword">if</span> nargin&lt;2
+   error(<span class="string">'Faltan parametros'</span>);
+<span class="keyword">end</span>
+y=dot(t.^2,A.^2);
+E=y;
+stem(t,A,<span class="string">'filled'</span>);
+axis([-10 10 -10 10]);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'A(t)'</span>);
+title(<span class="string">'Grafica-Energiadis- Prob 3.1.1 C'</span>);
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+</pre><pre class="language-matlab"><span class="keyword">end</span>
+</pre><pre class="codeinput">figure
+subplot(4,2,1);
+t=[-1 0 1 2 3 4 5 6 7 8 9];
+A=[0 0 1 2 3 2 1 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'A(t)'</span>);
+stem(t,A,<span class="string">'filled'</span>),title(<span class="string">'x[n]'</span>);
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+
+subplot(4,2,2);
+t=[-9 -8 -7 -6 -5 -4 -3 -2 -1 0 1];
+A=[0 0 0 0 1 2 3 2 1 0 0];
+axis([-10 10 -6 6]);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'A(t)'</span>);
+stem(t,A,<span class="string">'filled'</span>),title(<span class="string">'x[-n]'</span>);
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+
+subplot(4,2,3);
+t=[-7 -6 -5 -4 -3 -2 -1 0 1 2 3];
+A=[0 0 1 2 3 2 1 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'A(t)'</span>);
+stem(t,A,<span class="string">'filled'</span>),title(<span class="string">'x[n+6]'</span>);
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+
+subplot(4,2,4);
+t=[5 6 7 8 9 10 11 12 13 14 15];
+A=[0 0 1 2 3 2 1 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'A(t)'</span>);
+stem(t,A,<span class="string">'filled'</span>),title(<span class="string">'x[n-6]'</span>);
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+
+subplot(4,2,5);
+t=[-1 0 1 2 3 4 5 6 7 8 9];
+A=[0 0 3 6 9 6 3 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'A(t)'</span>);
+stem(t,A,<span class="string">'filled'</span>),title(<span class="string">'x[3n]'</span>);
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+
+subplot(4,2,6);
+t=[-1 0 1 2 3 4 5 6 7 8 9];
+A=[0 0 1/3 2/3 1 2/3 1/3 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'A(t)'</span>);
+stem(t,A,<span class="string">'filled'</span>),title(<span class="string">'x[n/3]'</span>);
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+
+subplot(4,2,7);
+t=[4 3 2 1 0 -1 -2 -3 -4 -5 -6];
+A=[0 0 1 2 3 2 1 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'A(t)'</span>);
+stem(t,A,<span class="string">'filled'</span>),title(<span class="string">'x[3-n]'</span>);
+hold <span class="string">on</span>
+grid <span class="string">on</span>
+</pre><img vspace="5" hspace="5" src="problem6_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica 3: Señales en tiempo discreto
+%% Integrantes
+% 
+% * Alonso Valdez Oren Jesús
+% * Hernández García Eduardo
+% * Luna Reyes Rodrigo
+%% Objetivos
+% * Manipulación básica de MATLAB
+% * Gráficas de señales reales y complejas discretas
+% * Transformación de señales discretas (escalamientos y traslaciones)
+% * Calculo de energía y potencia de señales discretas
+
+%% Desarrollo
+
+%%
+% 
+%   function [f] = fun1(W,a)
+%   f =@(n) a.^n.*cos(W.*n)+1j.*a.^n.*sin(W.*n).*(n>=0)
+%   end
+% 
+
+n = -2:10;
+a = 0.9;
+f = @(n) (n.*a.^n).*(n>0);
+fun2();
+
+%%
+% 
+%   function [E] = energiadis(t,A)
+%
+%   if nargin<2
+%      error('Faltan parametros');
+%   end
+%   y=dot(t.^2,A.^2);
+%   E=y;
+%   stem(t,A,'filled');
+%   axis([-10 10 -10 10]);
+%   xlabel('t');
+%   ylabel('A(t)');
+%   title('Grafica-Energiadis- Prob 3.1.1 C');
+%   hold on
+%   grid on
+%
+%   end
+% 
+figure
+subplot(4,2,1);
+t=[-1 0 1 2 3 4 5 6 7 8 9];
+A=[0 0 1 2 3 2 1 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel('t');
+ylabel('A(t)');
+stem(t,A,'filled'),title('x[n]');
+hold on
+grid on
+
+subplot(4,2,2);
+t=[-9 -8 -7 -6 -5 -4 -3 -2 -1 0 1];
+A=[0 0 0 0 1 2 3 2 1 0 0];
+axis([-10 10 -6 6]);
+xlabel('t');
+ylabel('A(t)');
+stem(t,A,'filled'),title('x[-n]');
+hold on
+grid on
+
+subplot(4,2,3);
+t=[-7 -6 -5 -4 -3 -2 -1 0 1 2 3];
+A=[0 0 1 2 3 2 1 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel('t');
+ylabel('A(t)');
+stem(t,A,'filled'),title('x[n+6]');
+hold on
+grid on
+
+subplot(4,2,4);
+t=[5 6 7 8 9 10 11 12 13 14 15];
+A=[0 0 1 2 3 2 1 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel('t');
+ylabel('A(t)');
+stem(t,A,'filled'),title('x[n-6]');
+hold on
+grid on
+
+subplot(4,2,5);
+t=[-1 0 1 2 3 4 5 6 7 8 9];
+A=[0 0 3 6 9 6 3 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel('t');
+ylabel('A(t)');
+stem(t,A,'filled'),title('x[3n]');
+hold on
+grid on
+
+subplot(4,2,6);
+t=[-1 0 1 2 3 4 5 6 7 8 9];
+A=[0 0 1/3 2/3 1 2/3 1/3 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel('t');
+ylabel('A(t)');
+stem(t,A,'filled'),title('x[n/3]');
+hold on
+grid on
+
+subplot(4,2,7);
+t=[4 3 2 1 0 -1 -2 -3 -4 -5 -6];
+A=[0 0 1 2 3 2 1 0 0 0 0];
+axis([-10 10 -6 6]);
+xlabel('t');
+ylabel('A(t)');
+stem(t,A,'filled'),title('x[3-n]');
+hold on
+grid on
+
+
+##### SOURCE END #####
+--></body></html>
