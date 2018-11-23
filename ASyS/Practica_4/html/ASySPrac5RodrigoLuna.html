@@ -1,0 +1,528 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-11-23"><meta name="DC.source" content="ASySPrac5RodrigoLuna.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes</a></li><li><a href="#2">Objetivos</a></li><li><a href="#3">Introducci&oacute;n</a></li><li><a href="#4">Ejemplo 6.1</a></li><li><a href="#6">Ejemplo 6.2</a></li><li><a href="#8">Ejemplo 6.4</a></li><li><a href="#9">Ejemplo 6.5</a></li><li><a href="#11">Ejemplo 6.7</a></li><li><a href="#12">Ejemplo 6.2 con c&oacute;digo del Ejemplo C6.2</a></li><li><a href="#14">Algor&iacute;tmo del trapecio</a></li></ul></div><h2 id="1">Integrantes</h2><div><ul><li>Alonso Valdes Oren Jesus</li><li>Hern&aacute;ndez Garc&iacute;a Jos&eacute; Eduardo</li><li>Luna Reyes Rodrigo</li></ul></div><h2 id="2">Objetivos</h2><div><ul><li>Realizar gr&aacute;ficas de series de Fourier exponenciales y trigonom&eacute;tricas en tiempo continuo</li><li>Manipulaci&oacute;n de instrucciones en MATLAB</li><li>Calculo n&uacute;merico de los coeficientes de Fourier</li></ul></div><h2 id="3">Introducci&oacute;n</h2><p>Se puede procesar Dn num&eacute;ricamente usando la transformada de Fourier en tiempo discreto. la cual usa muestras de una se&ntilde;al per&oacute;dica x(t) sobre un perodo "T", por lo tanto hay No=To/T n&uacute;meros de muestra en un periodo To. Para encontrar la relaci&oacute;n entre Dn y las muestras de x(t), considerar Ecuaciones que no s&eacute; c&oacute;mo se hagan en MATLAB, p&aacute;gina 449 del lathi(PDF) Donde x(kT) es la Kth muestra de x(t) y M&aacute;s ecuaciones En la pr&aacute;ctica es imposible hacer que T tienda a 0. Podemos hacer T muy peque&ntilde;a, pero no 0, lo que har&aacute; que los datos aumenten sin l&iacute;mites. Por lo tanto, ignoraremos el l&iacute;mite de T con el entendimiento impl&iacute;cito de que T es razonablemente peque&ntilde;o. El valor distinto de cero T dar&aacute; como resultado alg&uacute;n error de c&aacute;lculo, que es inevitable en cualquier evaluaci&oacute;n num&eacute;rica de una integral. Los el error resultante de una T distinta de cero se denomina error de alias. Por lo tanto, podemos expresar la ecuaci&oacute;n Ecuaci&oacute;n del Lathi Ahora, de la ecuaci&oacute;n \Omega_o No = 2pi. Por lo tanto  e^{jOmega_o (N+K0)} =e^{j Omeha:o K} sigue: D_{n -No} =D_{n} La propiedad de periodicidad quiere decir que m&aacute;s alla de n)No/2, los coeficienres</p><h2 id="4">Ejemplo 6.1</h2><p>Se realiza la gr&aacute;fica de la serie de fourier para la funci&oacute;n exponencial e^(-t/2), tambi&eacute;n se grafica el error y su energ&iacute;a, el espectro de magnitud y el espectro de fase.</p><pre class="codeinput">t0 = 0;
+tf = pi;
+dn = @(n) 0.504/(1+4*n*j);
+d0 = 0.504;
+f = @(t) exp(-t/2);
+armo = 4;
+a = -7;
+b = 7;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+</pre><img vspace="5" hspace="5" src="ASySPrac5RodrigoLuna_01.png" alt=""> <p>Se realiza el mismo ejercicio para 15 arm&oacute;nicos.</p><pre class="codeinput">armo = 15;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+</pre><img vspace="5" hspace="5" src="ASySPrac5RodrigoLuna_02.png" alt=""> <h2 id="6">Ejemplo 6.2</h2><p>Se realiza la gr&aacute;fica de la serie de fourier para la funci&oacute;n triangular con amplitud A (en este caso A=3), tambi&eacute;n se grafica el error y su energ&iacute;a, el espectro de magnitud y el espectro de fase.</p><pre class="codeinput">t0 = 0;
+tf = 2;
+A=3;
+dn = @(n) -(4*A)/(n^2*pi^2)*sin(n*pi/2)*j;
+d0 = 0;
+f=@(t) A*sawtooth(pi*(t)+pi/2,0.5);
+armo = 4;
+a = -5;
+b = 5;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+</pre><img vspace="5" hspace="5" src="ASySPrac5RodrigoLuna_03.png" alt=""> <p>Se realiza el mismo ejercicio para 15 arm&oacute;nicos.</p><pre class="codeinput">armo = 15;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+</pre><img vspace="5" hspace="5" src="ASySPrac5RodrigoLuna_04.png" alt=""> <h2 id="8">Ejemplo 6.4</h2><p>El ejemplo 6.4 se repite el caso del ejemplo 6.2.</p><h2 id="9">Ejemplo 6.5</h2><p>Se realiza la gr&aacute;fica de la serie de fourier para la funci&oacute;n cuadrada con amplitud A (en este caso A=3), tambi&eacute;n se grafica el error y su energ&iacute;a, el espectro de magnitud y el espectro de fase.</p><pre class="codeinput">t0 = 0;
+tf = 2*pi;
+dn = @(n) (1/(n*pi))*sin(n*pi/2);
+d0 = 1/2;
+f=@(t) (1/2)*square(t+pi/2)+0.5;
+armo = 4;
+a = -4*pi;
+b = 4*pi;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+</pre><img vspace="5" hspace="5" src="ASySPrac5RodrigoLuna_05.png" alt=""> <p>Se realiza el mismo ejercicio para 15 arm&oacute;nicos.</p><pre class="codeinput">armo = 15;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+</pre><img vspace="5" hspace="5" src="ASySPrac5RodrigoLuna_06.png" alt=""> <h2 id="11">Ejemplo 6.7</h2><h2 id="12">Ejemplo 6.2 con c&oacute;digo del Ejemplo C6.2</h2><p>En este ejercicio usaremos un c&oacute;digo similar al mostrado en el Ejemplo C6.2 del libro Linear Systems and Signals de B. P. Lathi. en este caso graficaremos la misma funci&oacute;n del Ejemplo 6.2</p><pre class="codeinput">A = 1;
+f = @(t) A*sawtooth(pi*(t)+pi/2,0.5);
+t = linspace(-5,5,10001);
+sumterms = zeros(16, length(t));sumterms(1,:)=0;
+<span class="keyword">for</span> n=1:size(sumterms,1)-1
+    sumterms(n+1,:)=(8*A)/((n^2)*(pi^2))*sin(pi*n/2)*sin(n*t*pi);
+<span class="keyword">end</span>
+x_N = cumsum (sumterms);
+</pre><p>El n&uacute;mero de arm&oacute;nicos se calcula en base al valor de N. Ejemplo: x_N(N+1,:)</p><pre class="codeinput">dn = @(n) -(4*A)/(n^2*pi^2)*sin(n*pi/2)*j;
+<span class="comment">% Gr&aacute;fica para 4 arm&oacute;nicos</span>
+<span class="comment">% Graficar 5 repeticiones</span>
+figure (11)
+hFig = figure(11);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,x_N(4+1,:),<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'Serie de Fourier'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+<span class="comment">% Recalcular para t=0:0.0001:2</span>
+t=0:0.0001:2;
+sumterms = zeros(16, length(t));sumterms(1,:)=0;
+<span class="keyword">for</span> n=1:size(sumterms,1)-1
+    sumterms(n+1,:)=(8*A)/((n^2)*(pi^2))*sin(pi*n/2)*sin(n*t*pi);
+<span class="keyword">end</span>
+x_N = cumsum (sumterms);
+<span class="comment">% Graficar se&ntilde;al y serie de fourier para 4 arm&oacute;nicos</span>
+subplot(3,2,2)
+plot(t,f(t),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t,x_N(4+1,:),<span class="string">'LineWidth'</span>,2)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis ([0 2 -1.1 1.1]);
+<span class="comment">% Gr&aacute;fica del error</span>
+e=f(t)-x_N(4+1,:);
+subplot(3,2,4)
+plot(t,e,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+<span class="comment">% Energ&iacute;a del error</span>
+subplot(3,2,6)
+e=f(t)-x_N(4+1,:);
+area(t,e.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+<span class="comment">% Espectro de magnitud</span>
+absdn=zeros(1,length(-4:4));
+cont=1;
+<span class="keyword">for</span> i =-4:4
+    <span class="keyword">if</span> i==0
+        absdn(cont)=0;
+    <span class="keyword">end</span>
+
+    absdn(cont)=dn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+
+subplot(3,2,3)
+stem(pi*(-4:4),abs(absdn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+<span class="comment">% Gr&aacute;fica del espectro de fase</span>
+subplot(3,2,5)
+stem(pi*(-4:4),angle(absdn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+<span class="comment">% Ahora se mustra la gr&aacute;fica de la misma funci&oacute;n para 15 arm&oacute;nicos</span>
+t = -5:0.001:5;
+sumterms = zeros(16, length(t));sumterms(1,:)=0;
+<span class="keyword">for</span> n=1:size(sumterms,1)-1
+    sumterms(n+1,:)=(8*A)/((n^2)*(pi^2))*sin(pi*n/2)*sin(n*t*pi);
+<span class="keyword">end</span>
+x_N = cumsum (sumterms);
+<span class="comment">% Graficar 5 repeticiones</span>
+figure (12)
+hFig = figure(12);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,x_N(15+1,:),<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'Serie de Fourier'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+<span class="comment">% Recalcular para t=0:0.0001:2</span>
+t=0:0.0001:2;
+sumterms = zeros(16, length(t));sumterms(1,:)=0;
+<span class="keyword">for</span> n=1:size(sumterms,1)-1
+    sumterms(n+1,:)=(8*A)/((n^2)*(pi^2))*sin(pi*n/2)*sin(n*t*pi);
+<span class="keyword">end</span>
+x_N = cumsum (sumterms);
+<span class="comment">% Graficar se&ntilde;al y serie de fourier para 4 arm&oacute;nicos</span>
+subplot(3,2,2)
+plot(t,f(t),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t,x_N(15+1,:),<span class="string">'LineWidth'</span>,2)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+nn=-15:15;
+axis ([0 2 -1.1 1.1]);
+<span class="comment">% Gr&aacute;fica del error</span>
+e=f(t)-x_N(15+1,:);
+subplot(3,2,4)
+plot(t,e,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+<span class="comment">% Energ&iacute;a del error</span>
+subplot(3,2,6)
+e=f(t)-x_N(15+1,:);
+area(t,e.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+<span class="comment">% Espectro de magnitud</span>
+absdn=zeros(1,length(-15:15));
+cont=1;
+<span class="keyword">for</span> i =-15:15
+    <span class="keyword">if</span> i==0
+        absdn(cont)=0;
+    <span class="keyword">end</span>
+
+    absdn(cont)=dn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+
+subplot(3,2,3)
+stem(pi*(-15:15),abs(absdn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+<span class="comment">% Gr&aacute;fica del espectro de fase</span>
+subplot(3,2,5) <span class="comment">% %</span>
+stem(pi*(-15:15),angle(absdn),<span class="string">'LineWidth'</span>,2) <span class="comment">% %</span>
+title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+</pre><img vspace="5" hspace="5" src="ASySPrac5RodrigoLuna_07.png" alt=""> <img vspace="5" hspace="5" src="ASySPrac5RodrigoLuna_08.png" alt=""> <h2 id="14">Algor&iacute;tmo del trapecio</h2><p>C&aacute;lculo de D0 a D4 de la funci&oacute;n e^(-t/2) usando el algortimo del trapecio compuesto</p><pre class="codeinput">d_ = zeros(1,5);
+T=pi;
+t0=0;
+w0=2*pi/(T-t0);
+<span class="keyword">for</span> n=1:5
+    f_1 = @(x) exp(-x/2).*cos(-(n-1)*w0*x);
+    f_2 = @(x) exp(-x/2).*sin(-(n-1)*w0*x);
+    d_(n)=(1/T)*trapito(f_1,15,t0,t0+T)+(1/T)*trapito(f_2,15,t0,t0+T)*j;
+<span class="keyword">end</span>
+</pre><p>C&aacute;lculo de D0 a D4 de la funci&oacute;n e^(-t/2) usando la funci&oacute;n ftt</p><pre class="codeinput">N_0 = 256;T_0=pi;T=T_0/N_0;t=(0:T:T*(N_0-1))';
+x=exp(-t/2);
+x(1)=(exp(-pi/2)+1)/2;
+D_n=fft(x)/N_0;
+</pre><p>Tabla comparativa entre los Dn calculados</p><pre class="codeinput">f = figure;
+t = uitable(f);
+d = {d_(1),D_n(1,1);d_(2),D_n(2,1);d_(3),D_n(3,1);d_(4),D_n(4,1);d_(5),D_n(5,1)};
+t.Data = d;
+t.ColumnName = {<span class="string">'Algoritmo del Trapecio Compuesto'</span>,<span class="string">'       Funci&oacute;n fft         '</span>};
+t.Position = [0 260 333 112];
+</pre><img vspace="5" hspace="5" src="ASySPrac5RodrigoLuna_09.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica 5: Series de Fourier en tiempo continuo
+%% Integrantes
+% * Alonso Valdes Oren Jesus
+% * Hernández García José Eduardo
+% * Luna Reyes Rodrigo
+%% Objetivos
+% * Realizar gráficas de series de Fourier exponenciales y trigonométricas en tiempo continuo
+% * Manipulación de instrucciones en MATLAB
+% * Calculo númerico de los coeficientes de Fourier
+%% Introducción
+% Se puede procesar Dn numéricamente usando la transformada de Fourier en tiempo discreto. la cual usa muestras de una señal peródica x(t) sobre un perodo "T",
+% por lo tanto hay No=To/T números de muestra en un periodo To. Para encontrar la relación entre Dn y las muestras de x(t), considerar 
+% Ecuaciones que no sé cómo se hagan en MATLAB, página 449 del lathi(PDF)
+% Donde x(kT) es la Kth muestra de x(t) y 
+% Más ecuaciones 
+% En la práctica es imposible hacer que T tienda a 0. Podemos hacer T muy pequeña, pero no 0, lo que hará que los datos aumenten sin límites.
+% Por lo tanto, ignoraremos el límite de T con el entendimiento implícito de que T es
+% razonablemente pequeño. El valor distinto de cero T dará como resultado algún error de cálculo, que es inevitable en cualquier evaluación numérica de una integral. Los
+% el error resultante de una T distinta de cero se denomina error de alias. Por lo tanto, podemos expresar la ecuación
+% Ecuación del Lathi
+% Ahora, de la ecuación \Omega_o No = 2pi. Por lo tanto  e^{jOmega_o (N+K0)} =e^{j Omeha:o K} sigue:
+% D_{n -No} =D_{n}
+% La propiedad de periodicidad quiere decir que más alla de n)No/2, los coeficienres 
+%% Ejemplo 6.1
+% Se realiza la gráfica de la serie de fourier para la función exponencial
+% e^(-t/2), también se grafica el error y su energía, el espectro de
+% magnitud y el espectro de fase.
+t0 = 0;
+tf = pi;
+dn = @(n) 0.504/(1+4*n*j);
+d0 = 0.504;
+f = @(t) exp(-t/2);
+armo = 4;
+a = -7;
+b = 7;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+%%
+% Se realiza el mismo ejercicio para 15 armónicos.
+armo = 15;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+%% Ejemplo 6.2
+% Se realiza la gráfica de la serie de fourier para la función triangular
+% con amplitud A (en este caso A=3), también se grafica el error y su 
+% energía, el espectro de magnitud y el espectro de fase.
+t0 = 0;
+tf = 2;
+A=3;
+dn = @(n) -(4*A)/(n^2*pi^2)*sin(n*pi/2)*j;
+d0 = 0;
+f=@(t) A*sawtooth(pi*(t)+pi/2,0.5);
+armo = 4;
+a = -5;
+b = 5;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+%%
+% Se realiza el mismo ejercicio para 15 armónicos.
+armo = 15;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+%% Ejemplo 6.4
+% El ejemplo 6.4 se repite el caso del ejemplo 6.2.
+%% Ejemplo 6.5
+% Se realiza la gráfica de la serie de fourier para la función cuadrada
+% con amplitud A (en este caso A=3), también se grafica el error y su 
+% energía, el espectro de magnitud y el espectro de fase.
+t0 = 0;
+tf = 2*pi;
+dn = @(n) (1/(n*pi))*sin(n*pi/2);
+d0 = 1/2;
+f=@(t) (1/2)*square(t+pi/2)+0.5;
+armo = 4;
+a = -4*pi;
+b = 4*pi;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+%%
+% Se realiza el mismo ejercicio para 15 armónicos.
+armo = 15;
+sfc(t0,tf,dn,d0,f,armo,a,b);
+%% Ejemplo 6.7
+%% Ejemplo 6.2 con código del Ejemplo C6.2
+% En este ejercicio usaremos un código similar al mostrado en el Ejemplo
+% C6.2 del libro Linear Systems and Signals de B. P. Lathi. en este caso
+% graficaremos la misma función del Ejemplo 6.2
+A = 1;
+f = @(t) A*sawtooth(pi*(t)+pi/2,0.5);
+t = linspace(-5,5,10001);
+sumterms = zeros(16, length(t));sumterms(1,:)=0;
+for n=1:size(sumterms,1)-1
+    sumterms(n+1,:)=(8*A)/((n^2)*(pi^2))*sin(pi*n/2)*sin(n*t*pi);
+end
+x_N = cumsum (sumterms);
+%%
+% El número de armónicos se calcula en base al valor de N. Ejemplo: x_N(N+1,:)
+dn = @(n) -(4*A)/(n^2*pi^2)*sin(n*pi/2)*j;
+% Gráfica para 4 armónicos
+% Graficar 5 repeticiones
+figure (11)
+hFig = figure(11);
+set(hFig, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,x_N(4+1,:),'LineWidth',2)
+grid on
+legend('Serie de Fourier','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+% Recalcular para t=0:0.0001:2
+t=0:0.0001:2;
+sumterms = zeros(16, length(t));sumterms(1,:)=0;
+for n=1:size(sumterms,1)-1
+    sumterms(n+1,:)=(8*A)/((n^2)*(pi^2))*sin(pi*n/2)*sin(n*t*pi);
+end
+x_N = cumsum (sumterms);
+% Graficar señal y serie de fourier para 4 armónicos
+subplot(3,2,2)
+plot(t,f(t),'r','LineWidth',2)
+grid on
+hold on
+plot(t,x_N(4+1,:),'LineWidth',2)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis ([0 2 -1.1 1.1]);
+% Gráfica del error
+e=f(t)-x_N(4+1,:);
+subplot(3,2,4)
+plot(t,e,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+% Energía del error
+subplot(3,2,6)
+e=f(t)-x_N(4+1,:);
+area(t,e.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+% Espectro de magnitud
+absdn=zeros(1,length(-4:4));
+cont=1;
+for i =-4:4
+    if i==0
+        absdn(cont)=0;
+    end
+    
+    absdn(cont)=dn(i);
+    cont=cont+1;
+end
+
+subplot(3,2,3)
+stem(pi*(-4:4),abs(absdn),'LineWidth',2)
+title('Espectro de magnitud D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+% Gráfica del espectro de fase
+subplot(3,2,5)
+stem(pi*(-4:4),angle(absdn),'LineWidth',2)
+title('Espectro de fase, \angle de D_n ','FontWeight','bold','FontSize',16) % % 
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+% Ahora se mustra la gráfica de la misma función para 15 armónicos
+t = -5:0.001:5;
+sumterms = zeros(16, length(t));sumterms(1,:)=0;
+for n=1:size(sumterms,1)-1
+    sumterms(n+1,:)=(8*A)/((n^2)*(pi^2))*sin(pi*n/2)*sin(n*t*pi);
+end
+x_N = cumsum (sumterms);
+% Graficar 5 repeticiones
+figure (12)
+hFig = figure(12);
+set(hFig, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,x_N(15+1,:),'LineWidth',2)
+grid on
+legend('Serie de Fourier','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+% Recalcular para t=0:0.0001:2
+t=0:0.0001:2;
+sumterms = zeros(16, length(t));sumterms(1,:)=0;
+for n=1:size(sumterms,1)-1
+    sumterms(n+1,:)=(8*A)/((n^2)*(pi^2))*sin(pi*n/2)*sin(n*t*pi);
+end
+x_N = cumsum (sumterms);
+% Graficar señal y serie de fourier para 4 armónicos
+subplot(3,2,2)
+plot(t,f(t),'r','LineWidth',2)
+grid on
+hold on
+plot(t,x_N(15+1,:),'LineWidth',2)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+nn=-15:15;
+axis ([0 2 -1.1 1.1]);
+% Gráfica del error
+e=f(t)-x_N(15+1,:);
+subplot(3,2,4)
+plot(t,e,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+% Energía del error
+subplot(3,2,6)
+e=f(t)-x_N(15+1,:);
+area(t,e.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+% Espectro de magnitud
+absdn=zeros(1,length(-15:15));
+cont=1;
+for i =-15:15
+    if i==0
+        absdn(cont)=0;
+    end
+    
+    absdn(cont)=dn(i);
+    cont=cont+1;
+end
+
+subplot(3,2,3)
+stem(pi*(-15:15),abs(absdn),'LineWidth',2)
+title('Espectro de magnitud D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+% Gráfica del espectro de fase
+subplot(3,2,5) % % 
+stem(pi*(-15:15),angle(absdn),'LineWidth',2) % % 
+title('Espectro de fase, \angle de D_n ','FontWeight','bold','FontSize',16) % % 
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+%% Algorítmo del trapecio
+% Cálculo de D0 a D4 de la función e^(-t/2) usando el algortimo del
+% trapecio compuesto
+d_ = zeros(1,5);
+T=pi;
+t0=0;
+w0=2*pi/(T-t0);
+for n=1:5
+    f_1 = @(x) exp(-x/2).*cos(-(n-1)*w0*x);
+    f_2 = @(x) exp(-x/2).*sin(-(n-1)*w0*x);
+    d_(n)=(1/T)*trapito(f_1,15,t0,t0+T)+(1/T)*trapito(f_2,15,t0,t0+T)*j;
+end
+%%
+% Cálculo de D0 a D4 de la función e^(-t/2) usando la función ftt
+N_0 = 256;T_0=pi;T=T_0/N_0;t=(0:T:T*(N_0-1))';
+x=exp(-t/2);
+x(1)=(exp(-pi/2)+1)/2;
+D_n=fft(x)/N_0;
+%%
+% Tabla comparativa entre los Dn calculados
+% 
+f = figure;
+t = uitable(f);
+d = {d_(1),D_n(1,1);d_(2),D_n(2,1);d_(3),D_n(3,1);d_(4),D_n(4,1);d_(5),D_n(5,1)};
+t.Data = d;
+t.ColumnName = {'Algoritmo del Trapecio Compuesto','       Función fft         '};
+t.Position = [0 260 333 112];
+##### SOURCE END #####
+--></body></html>
