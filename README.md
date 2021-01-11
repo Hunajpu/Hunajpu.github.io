@@ -4,4 +4,4 @@
 * [Práctica 5](https://hunajpu.github.io/ASyS/Practica_5/html/ASySPrac5RodrigoLuna.html)
 
 #### Prácticas Ingeniería Asistida por Computadora
-* [Actividad 1](https://hunajpu.github.io/CAE/Actividad_1/html/Actividad_1.html)
+* [Actividad 1](https://hunajpu.github.io/CAE/Actividad_1/html/Actividad1.html)
