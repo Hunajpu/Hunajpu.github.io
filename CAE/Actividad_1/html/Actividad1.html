@@ -1,0 +1,363 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Actividad 1</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-01-11"><meta name="DC.source" content="Actividad1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><b>Actividad 1</b></h1><!--introduction--><p>Autor: Rodrigo Luna Reyes; Fecha: 11 de enero de 2021</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">Constantes de rigidez de cada elemento.</a></li><li><a href="#3">Construcci&oacute;n de la matriz de rigidez</a></li><li><a href="#4">Declaramos el vector de fuerzas</a></li><li><a href="#5">Resolviendo para q</a></li><li><a href="#7">Esfuerzos axiales</a></li><li><a href="#8">Fuerzas internas</a></li></ul></div><p>Material: Madera del tipo Douglas Fir</p><pre class="codeinput">E = 13.1e+9; <span class="comment">%Pa</span>
+<span class="comment">% Secci&oacute;n Transversal</span>
+A = 3.6e-3; <span class="comment">%m^2</span>
+<span class="comment">% Longitud de los elementos</span>
+L = 4; <span class="comment">%m</span>
+</pre><h2 id="2">Constantes de rigidez de cada elemento.</h2><pre class="codeinput">k1 = PlaneTrussElementStiffness(E,A,L,60);
+k2 = PlaneTrussElementStiffness(E,A,L,0);
+k3 = PlaneTrussElementStiffness(E,A,L,0);
+k4 = PlaneTrussElementStiffness(E,A,L,120);
+k5 = PlaneTrussElementStiffness(E,A,L,0);
+k6 = PlaneTrussElementStiffness(E,A,L,0);
+k7 = PlaneTrussElementStiffness(E,A,L,0);
+k8 = PlaneTrussElementStiffness(E,A,L,120);
+k9 = PlaneTrussElementStiffness(E,A,L,60);
+k10 = PlaneTrussElementStiffness(E,A,L,120);
+k11 = PlaneTrussElementStiffness(E,A,L,60);
+</pre><h2 id="3">Construcci&oacute;n de la matriz de rigidez</h2><pre class="codeinput">K = zeros(14);
+
+K = PlaneTrussAssemble(K, k1, 1, 2);
+K = PlaneTrussAssemble(K, k2, 2, 3);
+K = PlaneTrussAssemble(K, k3, 3, 4);
+K = PlaneTrussAssemble(K, k4, 5, 4);
+K = PlaneTrussAssemble(K, k5, 6, 5);
+K = PlaneTrussAssemble(K, k6, 7, 6);
+K = PlaneTrussAssemble(K, k7, 1, 7);
+K = PlaneTrussAssemble(K, k8, 7, 2);
+K = PlaneTrussAssemble(K, k9, 7, 3);
+K = PlaneTrussAssemble(K, k10, 6, 3);
+K = PlaneTrussAssemble(K, k11, 6, 4);
+
+k = K([3:9, 11:14], [3:9, 11:14]);
+</pre><h2 id="4">Declaramos el vector de fuerzas</h2><p>En este caso excluimos las fuerzas de reacci&oacute;n que actuan en el nodo A (q1 y q2) y la reacci&oacute;n vertical del nodo E (q10).</p><pre class="codeinput">f = [0; 0; 0; 0; 0; 0; 0; 0; 0; 0; -108e+3];
+</pre><h2 id="5">Resolviendo para q</h2><p>Resolvemos la ecuaci&oacute;n para obtener los desplazamientos de cada nodo</p><p><img src="Actividad1_eq16990533043346876143.png" alt="$$F = KQ$$"></p><pre class="codeinput">q = k\f;
+Q = [0; 0; q(1:7); 0; q(8:end)]
+
+<span class="comment">% Obteniendo el vector de fuerzas final</span>
+F = K*Q;
+<span class="comment">% Extraemos los valores de las reacciones (f1, f2 y f10)</span>
+<span class="comment">% Nodo A:</span>
+Ra = F([2 3])
+<span class="comment">% Nodo E</span>
+Re = F(10)
+</pre><pre class="codeoutput">
+Q =
+
+     0.0000e+000
+     0.0000e+000
+    11.7527e-003
+   -14.9279e-003
+     4.7011e-003
+   -24.4275e-003
+     1.1753e-003
+    -9.4996e-003
+    10.5774e-003
+     0.0000e+000
+     8.8145e-003
+   -17.9813e-003
+     3.5258e-003
+   -27.8202e-003
+
+
+Ra =
+
+    72.0000e+003
+     0.0000e+000
+
+
+Re =
+
+    36.0000e+003
+
+</pre><h2 id="7">Esfuerzos axiales</h2><pre class="codeinput">s1 = PlaneTrussElementStress(E,L,60,Q([1:4]))
+s2 = PlaneTrussElementStress(E,L,0,Q([3:6]))
+s3 = PlaneTrussElementStress(E,L,0,Q([5:8]))
+s4 = PlaneTrussElementStress(E,L,120,Q([9 10 7 8]))
+s5 = PlaneTrussElementStress(E,L,0,Q([11 12 9 10]))
+s6 = PlaneTrussElementStress(E,L,0,Q([13 14 11 12]))
+s7 = PlaneTrussElementStress(E,L,0,Q([1 2 13 14]))
+s8 = PlaneTrussElementStress(E,L,120,Q([13 14 3 4]))
+s9 = PlaneTrussElementStress(E,L,60,Q([13 14 5 6]))
+s10 = PlaneTrussElementStress(E,L,120,Q([11 12 5 6]))
+s11 = PlaneTrussElementStress(E,L,60,Q([11 12 7 8]))
+</pre><pre class="codeoutput">
+s1 =
+
+   -23.0940e+006
+
+
+s2 =
+
+   -23.0940e+006
+
+
+s3 =
+
+   -11.5470e+006
+
+
+s4 =
+
+   -11.5470e+006
+
+
+s5 =
+
+     5.7735e+006
+
+
+s6 =
+
+    17.3205e+006
+
+
+s7 =
+
+    11.5470e+006
+
+
+s8 =
+
+    23.0940e+006
+
+
+s9 =
+
+    11.5470e+006
+
+
+s10 =
+
+   -11.5470e+006
+
+
+s11 =
+
+    11.5470e+006
+
+</pre><h2 id="8">Fuerzas internas</h2><pre class="codeinput">f1 = s1*A
+f2 = s2*A
+f3 = s3*A
+f4 = s4*A
+f5 = s5*A
+f6 = s6*A
+f7 = s7*A
+f8 = s8*A
+f9 = s9*A
+f10 = s10*A
+f11 = s11*A
+</pre><pre class="codeoutput">
+f1 =
+
+   -83.1384e+003
+
+
+f2 =
+
+   -83.1384e+003
+
+
+f3 =
+
+   -41.5692e+003
+
+
+f4 =
+
+   -41.5692e+003
+
+
+f5 =
+
+    20.7846e+003
+
+
+f6 =
+
+    62.3538e+003
+
+
+f7 =
+
+    41.5692e+003
+
+
+f8 =
+
+    83.1384e+003
+
+
+f9 =
+
+    41.5692e+003
+
+
+f10 =
+
+   -41.5692e+003
+
+
+f11 =
+
+    41.5692e+003
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% *Actividad 1*
+% Autor: Rodrigo Luna Reyes; Fecha: 11 de enero de 2021
+%%
+% Material: Madera del tipo Douglas Fir
+E = 13.1e+9; %Pa
+% Sección Transversal
+A = 3.6e-3; %m^2
+% Longitud de los elementos
+L = 4; %m
+
+%% Constantes de rigidez de cada elemento.
+
+k1 = PlaneTrussElementStiffness(E,A,L,60);
+k2 = PlaneTrussElementStiffness(E,A,L,0);
+k3 = PlaneTrussElementStiffness(E,A,L,0);
+k4 = PlaneTrussElementStiffness(E,A,L,120);
+k5 = PlaneTrussElementStiffness(E,A,L,0);
+k6 = PlaneTrussElementStiffness(E,A,L,0);
+k7 = PlaneTrussElementStiffness(E,A,L,0);
+k8 = PlaneTrussElementStiffness(E,A,L,120);
+k9 = PlaneTrussElementStiffness(E,A,L,60);
+k10 = PlaneTrussElementStiffness(E,A,L,120);
+k11 = PlaneTrussElementStiffness(E,A,L,60);
+
+%% Construcción de la matriz de rigidez
+K = zeros(14);
+
+K = PlaneTrussAssemble(K, k1, 1, 2);
+K = PlaneTrussAssemble(K, k2, 2, 3);
+K = PlaneTrussAssemble(K, k3, 3, 4);
+K = PlaneTrussAssemble(K, k4, 5, 4);
+K = PlaneTrussAssemble(K, k5, 6, 5);
+K = PlaneTrussAssemble(K, k6, 7, 6);
+K = PlaneTrussAssemble(K, k7, 1, 7);
+K = PlaneTrussAssemble(K, k8, 7, 2);
+K = PlaneTrussAssemble(K, k9, 7, 3);
+K = PlaneTrussAssemble(K, k10, 6, 3);
+K = PlaneTrussAssemble(K, k11, 6, 4);
+
+k = K([3:9, 11:14], [3:9, 11:14]);
+
+%% Declaramos el vector de fuerzas
+% En este caso excluimos las fuerzas de reacción que actuan en el nodo A 
+% (q1 y q2) y la reacción vertical del nodo E (q10).
+f = [0; 0; 0; 0; 0; 0; 0; 0; 0; 0; -108e+3];
+
+%% Resolviendo para q
+% Resolvemos la ecuación para obtener los desplazamientos de cada nodo
+%%
+% 
+% $$F = KQ$$
+% 
+q = k\f;
+Q = [0; 0; q(1:7); 0; q(8:end)]
+
+% Obteniendo el vector de fuerzas final
+F = K*Q;
+% Extraemos los valores de las reacciones (f1, f2 y f10)
+% Nodo A:
+Ra = F([2 3])
+% Nodo E
+Re = F(10)
+%% Esfuerzos axiales
+s1 = PlaneTrussElementStress(E,L,60,Q([1:4]))
+s2 = PlaneTrussElementStress(E,L,0,Q([3:6]))
+s3 = PlaneTrussElementStress(E,L,0,Q([5:8]))
+s4 = PlaneTrussElementStress(E,L,120,Q([9 10 7 8]))
+s5 = PlaneTrussElementStress(E,L,0,Q([11 12 9 10]))
+s6 = PlaneTrussElementStress(E,L,0,Q([13 14 11 12]))
+s7 = PlaneTrussElementStress(E,L,0,Q([1 2 13 14]))
+s8 = PlaneTrussElementStress(E,L,120,Q([13 14 3 4]))
+s9 = PlaneTrussElementStress(E,L,60,Q([13 14 5 6]))
+s10 = PlaneTrussElementStress(E,L,120,Q([11 12 5 6]))
+s11 = PlaneTrussElementStress(E,L,60,Q([11 12 7 8]))
+
+%% Fuerzas internas
+f1 = s1*A
+f2 = s2*A
+f3 = s3*A
+f4 = s4*A
+f5 = s5*A
+f6 = s6*A
+f7 = s7*A
+f8 = s8*A
+f9 = s9*A
+f10 = s10*A
+f11 = s11*A
+##### SOURCE END #####
+--></body></html>
