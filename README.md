@@ -5,3 +5,6 @@
 
 #### Prácticas Ingeniería Asistida por Computadora
 * [Actividad 1](https://hunajpu.github.io/CAE/Actividad_1/html/Actividad1.html)
+
+#### Trabajo Terminal
+* [Cronograma](https://hunajpu.github.io/Cronograma_tt/Overview.html)
