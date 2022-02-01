@@ -1,0 +1,196 @@
+project tt "Eje lineal para Cobots" 2022-01-31 +9m{
+    timezone "America/Mexico_City"
+    timeformat "%d-%m-%Y"
+    numberformat "-" "" "," "." 1
+    currencyformat "(" ")" "," "." 0
+    currency "MXN"
+    now 2021-10-18-01:00
+
+    scenario plan "Plan"{
+
+    }
+}
+
+# Vacaciones
+leaves holiday "Dia inhábil 1" 2021-02-07
+leaves holiday "Dia inhábil 2" 2021-03-21
+leaves holiday "Semana Santa" 2021-04-14 +9d
+leaves holiday "Dia inhábil 3" 2021-05-05
+leaves holiday "Dia inhábil 4" 2021-05-10
+leaves holiday "Vacaciones de Verano" 2021-07-18 +3w
+
+# Costos
+account cost "Costos del proyecto"{
+    account material "Material"
+}
+
+# Recursos
+resource asesor "Gaston Hugo Salazar Silva" {
+    email "ghsalazar@ipn.mx"
+}
+resource inge "Rodrigo Luna Reyes" {
+    managers asesor
+    email "irodrigoro@gmail.com"
+}
+
+# Tareas
+task EjeCobots "Eje lineal para Robots Colavorativos en ROS"{
+    responsible inge
+    allocate inge
+    task design "Diseño detallado"{
+        task mech "Diseño del mecanismo de movimiento"{
+            effort 20d
+        }
+        task motor "Selección de motor y controladores"{
+            effort 2d
+            depends !mech
+        }
+        task estructura "Diseño de la estructrua"{
+            effort 15d
+            depends !motor
+        }
+        task mech_electro "Diseño de electrónica para accionamiento mecánico"{
+            effort 12d
+            depends !estructura{onstart}
+        }
+        task info_electro "Diseño de electrónica para gestión de información"{
+            effort 12d
+            depends !estructura{onstart}
+        }
+        task psu "Selección y diseño de la fuente de alimentación"{
+            effort 2d
+            depends !motor, !mech_electro, !info_electro
+        }
+        task soft "Diseño de software"{
+            effort 7d
+        }
+    }
+    task build "Construcción de subsistemas"{
+        depends !design, !doc1
+        task b_struct "Construcción de la estructura"{
+            effort 2w
+        }
+        task b_mech "Construcción del mecanismo de movimiento"{
+            effort 3w
+        }
+        task b_electro "Construcción de sistemas electrónicos"{
+            effort 3w
+        }
+        task dev_ros "Programación de paquete de ROS"{
+            effort 8w
+        }
+    }
+    task check "Implementación de subsistemas"{
+        task ensam "Ensamble de subsistemas"{
+            effort 1w
+            depends !!build
+        }
+        task sim "Modelo 3D del proyecto"{
+            effort 2w
+            depends !!design
+        }
+    }
+    task test "Pruebas de funcionamiento"{
+        task test_mov "Prueba de movimiento"{
+            effort 1w
+            depends !!build.b_struct, !!build.b_mech, !!build.b_electro
+        }
+        task test_ros "Prueba de ROS"{
+            effort 1w
+            depends !!build.b_mech, !!build.b_electro, !!build.dev_ros {gapduration 2m}
+        }
+    }
+    task doc1 "Informe de TT1"{
+        effort 1w
+        depends !design
+    }
+    task doc2 "Informe de TT2"{
+        effort 1w
+        depends !doc1
+    }
+}
+
+# ****************************
+# ****************************
+# ********* Reportes *********
+# ****************************
+# ****************************
+
+macro TaskTip [
+  tooltip istask() -8<-
+    '''Start: ''' <-query attribute='start'->
+    '''End: ''' <-query attribute='end'->
+    ----
+    '''Resources:'''
+
+    <-query attribute='resources'->
+    ----
+    '''Precursors: '''
+
+    <-query attribute='precursors'->
+    ----
+    '''Followers: '''
+
+    <-query attribute='followers'->
+    ->8-
+]
+
+textreport frame "textreport" {
+  textreport index "Overview" {
+    formats html
+    center '<[report id="overview"]>'
+  }
+
+  textreport "ContactList" {
+    formats html
+    title "Contact List"
+    center '<[report id="contactList"]>'
+  }
+}
+
+# A traditional Gantt chart with a project overview.
+taskreport overview "" {
+  header -8<-
+    === Project Overview ===
+
+    The project is structured into 3 phases.
+
+    # Specification
+    # Testing
+
+    === Original Project Plan ===
+  ->8-
+  columns bsi { title 'No.' },
+          name{title "Actividad"}, responsible{title "Responsable"},start{title "Inicio"}, end{title "Termino"}, effort{title "Días"}, chart { ${TaskTip} }
+  # For this report we like to have the abbreviated weekday in front
+  # of the date. %a is the tag for this.
+  timeformat "%d-%m-%Y"
+  loadunit days
+  #hideresource @all
+  #caption 'All effort values are in man days.'
+
+  footer -8<-
+    === Staffing ===
+
+    All project phases are properly staffed. See [[ResourceGraph]] for
+    detailed resource allocations.
+
+    === Current Status ===
+
+    The project started off with a delay of 4 days. This slightly affected
+    the original schedule. See [[Deliveries]] for the impact on the
+    delivery dates.
+  ->8-
+}
+
+# A list of all employees with their contact details.
+resourcereport contactList "" {
+  headline "Recursos Humanos"
+  columns name{title "Nombre"},
+          email { celltext 1 "[mailto:<-email-> <-email->]" },
+          managers { title "Asesor" },
+          chart { scale month }
+  hideresource ~isleaf()
+  sortresources name.up
+  hidetask @all
+}
